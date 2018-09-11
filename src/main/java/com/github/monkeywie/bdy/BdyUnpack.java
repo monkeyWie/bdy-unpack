@@ -418,7 +418,12 @@ public class BdyUnpack {
   }
 
   public static void main(String[] args) throws Exception {
-    unzip(args[0], args[1], new ConsoleUnzipCallback());
+    if (args.length == 0) {
+      System.err.println("params error：java -jar bdy-unpack.jar <packFile> [unpackPath]");
+    }
+    String packFile = args[0];
+    String unpackPath = args.length == 1 ? System.getProperty("user.dir") : args[1];
+    unzip(packFile, unpackPath, new ConsoleUnzipCallback());
   }
 
   public interface BdyUnzipCallback {
